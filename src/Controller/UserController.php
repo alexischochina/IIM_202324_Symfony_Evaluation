@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Panier;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
@@ -26,6 +27,10 @@ class UserController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
+        $user->setRoles(['ROLE_USER']);
+        $panier = new Panier();
+        $user->setPanier($panier);
+        $panier->setEtat(false);
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 

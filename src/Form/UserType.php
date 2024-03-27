@@ -15,14 +15,9 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('roles')
             ->add('password')
             ->add('nom')
             ->add('prenom')
-            ->add('panier', EntityType::class, [
-                'class' => Panier::class,
-                'choice_label' => 'id',
-            ])
         ;
     }
 
