@@ -4,7 +4,14 @@
 
 {% block body %}
     <h1>Produit index</h1>
-
+    <nav>
+        <ul>
+            <li>
+                <a href="{{ path('app_contenu_panier_index') }}">Panier</a>
+                <a href="{{ path('app_register') }}">Register</a>
+                <a href="{{ path('app_login') }}">Login</a>
+            </li>
+        </ul>
     <table class="table">
         <thead>
             <tr>

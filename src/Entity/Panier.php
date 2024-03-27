@@ -14,10 +14,6 @@ class Panier
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToOne(inversedBy: 'panier', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
-
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateAchat = null;
 
@@ -27,21 +23,13 @@ class Panier
     #[ORM\OneToOne(mappedBy: 'panier', cascade: ['persist', 'remove'])]
     private ?ContenuPanier $contenuPanier = null;
 
+    #[ORM\ManyToOne(inversedBy: 'paniers')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $userPanier = null;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(User $user): static
-    {
-        $this->user = $user;
-
-        return $this;
     }
 
     public function getDateAchat(): ?\DateTimeInterface
@@ -86,6 +74,18 @@ class Panier
         }
 
         $this->contenuPanier = $contenuPanier;
+
+        return $this;
+    }
+
+    public function getUserPanier(): ?User
+    {
+        return $this->userPanier;
+    }
+
+    public function setUserPanier(?User $userPanier): static
+    {
+        $this->userPanier = $userPanier;
 
         return $this;
     }
