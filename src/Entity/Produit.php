@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-
+#[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
 class Produit
 {
@@ -126,6 +126,15 @@ class Produit
     {
         if ($this->contenuPaniers->removeElement($contenuPanier)) {
             $contenuPanier->removeProduit($this);
+        }
+
+        return $this;
+    }
+    #[ORM\PostRemove]
+    public function deleteImage(): static
+    {
+        if ($this->photo != null) {
+            unlink(__DIR__ . '/../../public/uploads/' . $this->photo);
         }
 
         return $this;
