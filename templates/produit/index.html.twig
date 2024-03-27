@@ -23,9 +23,9 @@
                 <td>{{ produit.id }}</td>
                 <td>{{ produit.nom }}</td>
                 <td>{{ produit.Description }}</td>
-                <td>{{ produit.prix }}</td>
+                <td>{{ produit.prix }}€</td>
                 <td>{{ produit.stock }}</td>
-                <td>{{ produit.photo }}</td>
+                <td><img src="{{asset('uploads/' ~ produit.Photo)}}" alt="logo du produit" width="100px" height="100px">
                 <td>
                     <a href="{{ path('app_produit_show', {'id': produit.id}) }}">show</a>
                     <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>

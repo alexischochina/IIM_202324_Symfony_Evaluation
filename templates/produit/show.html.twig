@@ -21,7 +21,7 @@
             </tr>
             <tr>
                 <th>Prix</th>
-                <td>{{ produit.prix }}</td>
+                <td>{{ produit.prix }}€</td>
             </tr>
             <tr>
                 <th>Stock</th>
@@ -29,7 +29,8 @@
             </tr>
             <tr>
                 <th>Photo</th>
-                <td>{{ produit.photo }}</td>
+                <td><img src="{{asset('uploads/' ~ produit.Photo)}}" alt="logo du produit" width="100px" height="100px">
+</td>
             </tr>
         </tbody>
     </table>

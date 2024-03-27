@@ -7,6 +7,7 @@ use App\Form\ProduitType;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -30,6 +31,30 @@ class ProduitController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+             /** @var UploadedFile $imageFile */
+             $imageFile = $form->get('photo')->getData();
+
+             // this condition is needed because the 'brochure' field is not required
+             // so the PDF file must be processed only when a file is uploaded
+             if ($imageFile) {
+                 $newFilename = uniqid() . '.' . $imageFile->guessExtension();
+ 
+                 // Move the file to the directory where brochures are stored
+                 try {
+                     $imageFile->move(
+                         $this->getParameter('upload_directory'),
+                         $newFilename
+                     );
+                 } catch (FileException $e) {
+                     // ... handle exception if something happens during file upload
+                     $this->addFlash('danger', "Impossible d'uploader le fichier");
+                     return $this->redirectToRoute('app_marque');
+                 }
+ 
+                 // updates the 'imageFilename' property to store the PDF file name
+                 // instead of its contents
+                 $produit->setPhoto($newFilename);
+             }
             $entityManager->persist($produit);
             $entityManager->flush();
 
