@@ -85,7 +85,25 @@ class ContenuPanierController extends AbstractController
             'form' => $form,
         ]);
     }
+    #[IsGranted('ROLE_USER')]
+    #[Route('/add/{id}', name: 'app_contenu_panier_add', methods: ['GET'])]
+    public function add(EntityManagerInterface $entityManager): Response
+    {
 
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+
+        $panierValide = $entityManager->getRepository(Panier::class)->findPanierActif($user);
+
+        if($panierValide != null){
+            $panierValide->setEtat(true);
+            $panierValide->setDateAchat(new \DateTime());
+            $entityManager->persist($panierValide);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_contenu_panier_index');
+    }
     #[Route('/{id}', name: 'app_contenu_panier_delete', methods: ['POST'])]
     public function delete(Request $request, ContenuPanier $contenuPanier, EntityManagerInterface $entityManager): Response
     {
