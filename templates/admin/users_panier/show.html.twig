@@ -4,5 +4,14 @@
 
 {% block body %}
     <h1>Paniers actif</h1>
+    {{ test }}
 
+    {% if contenu_panier %}
+        {{ dump(contenu_panier) }}
+        {% for contenu in contenu_panier %}
+            {{ contenu.id }}
+        {% endfor %}
+    {% else %}
+        <p>Le panier est vide.</p>
+    {% endif %}
 {% endblock %}

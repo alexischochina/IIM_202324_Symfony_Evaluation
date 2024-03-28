@@ -22,13 +22,14 @@ class AdminController extends AbstractController
     }
 
     #[Route('/users-panier/{id}', name: 'app_admin_users_panier_show')]
-    public function usersPanierShow(User $user): Response
+    public function usersPanierShow(Panier $panier): Response
     {
-        //$userId = $user->getId();
-        $panier = $user->getPaniers();
+        $contenu_panier = $panier->getContenuPanier();
+        $test = $panier->getId();
 
         return $this->render('admin/users_panier/show.html.twig', [
-            'contenu_panier' => $panier,
+            'test' => $test,
+            'contenu_panier' => $contenu_panier,
         ]);
     }
 }
