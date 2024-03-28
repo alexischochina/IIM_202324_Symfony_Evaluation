@@ -32,6 +32,14 @@ class PanierRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
+    public function findAllPanierActif()
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.etat = 0')
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return Panier[] Returns an array of Panier objects
     //     */
