@@ -4,39 +4,34 @@
 
 {% block body %}
     <h1>Produit index</h1>
-    <nav>
-        <ul>
-            <li>
-                <a href="{{ path('app_contenu_panier_index') }}">Panier</a>
-                <a href="{{ path('app_register') }}">Register</a>
-                <a href="{{ path('app_login') }}">Login</a>
-            </li>
-        </ul>
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>Prix</th>
-                <th>Stock</th>
-                <th>Photo</th>
+        <tr>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Prix</th>
+            <th>Stock</th>
+            <th>Photo</th>
+            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %}
                 <th>actions</th>
-            </tr>
+            {% endif %}
+        </tr>
         </thead>
         <tbody>
         {% for produit in produits %}
             <tr>
-                <td>{{ produit.id }}</td>
                 <td>{{ produit.nom }}</td>
                 <td>{{ produit.Description }}</td>
                 <td>{{ produit.prix }}€</td>
                 <td>{{ produit.stock }}</td>
-                <td><img src="{{asset('uploads/' ~ produit.Photo)}}" alt="logo du produit" width="100px" height="100px">
-                <td>
-                    <a href="{{ path('app_produit_show', {'id': produit.id}) }}">show</a>
-                    <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>
-                </td>
+                <td><img src="{{ asset('uploads/' ~ produit.Photo) }}" alt="logo du produit" width="100px"
+                         height="100px"></td>
+                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %}
+                    <td>
+                        <a href="{{ path('app_produit_show', {'id': produit.id}) }}">show</a>
+                        <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>
+                    </td>
+                {% endif %}
             </tr>
         {% else %}
             <tr>
@@ -46,5 +41,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_produit_new') }}">Create new</a>
+    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %}
+        <a href="{{ path('app_produit_new') }}">Create new</a>
+    {% endif %}
 {% endblock %}

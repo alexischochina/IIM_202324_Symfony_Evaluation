@@ -2,12 +2,16 @@
 
 namespace App\Controller;
 
+use App\Entity\ContenuPanier;
 use App\Entity\Produit;
+use App\Entity\User;
 use App\Form\ProduitType;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -30,31 +34,23 @@ class ProduitController extends AbstractController
         $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-             /** @var UploadedFile $imageFile */
-             $imageFile = $form->get('photo')->getData();
+        if($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $imageFile */
+            $imageFile = $form->get('photo')->getData();
 
-             // this condition is needed because the 'brochure' field is not required
-             // so the PDF file must be processed only when a file is uploaded
-             if ($imageFile) {
-                 $newFilename = uniqid() . '.' . $imageFile->guessExtension();
- 
-                 // Move the file to the directory where brochures are stored
-                 try {
-                     $imageFile->move(
-                         $this->getParameter('upload_directory'),
-                         $newFilename
-                     );
-                 } catch (FileException $e) {
-                     // ... handle exception if something happens during file upload
-                     $this->addFlash('danger', "Impossible d'uploader le fichier");
-                     return $this->redirectToRoute('app_marque');
-                 }
- 
-                 // updates the 'imageFilename' property to store the PDF file name
-                 // instead of its contents
-                 $produit->setPhoto($newFilename);
-             }
+            if($imageFile) {
+                $newFilename = uniqid() . '.' . $imageFile->guessExtension();
+                try {
+                    $imageFile->move(
+                        $this->getParameter('upload_directory'),
+                        $newFilename
+                    );
+                } catch(FileException $e) {
+                    $this->addFlash('danger', "Impossible d'uploader le fichier");
+                    return $this->redirectToRoute('app_produit_index');
+                }
+                $produit->setPhoto($newFilename);
+            }
             $entityManager->persist($produit);
             $entityManager->flush();
 
@@ -75,13 +71,36 @@ class ProduitController extends AbstractController
         ]);
     }
 
+    /**
+     * @throws Exception
+     */
     #[Route('/{id}/edit', name: 'app_produit_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Produit $produit, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        $user = $this->getUser();
+        if(!$user) {
+            throw $this->createNotFoundException('Vous devez être connecté pour accéder à votre panier.');
+        }
+
+        if($user instanceof User) {
+            $paniers = $user->getPaniers();
+        } else {
+            throw new Exception('L\'objet fourni n\'est pas une instance de la classe User.');
+        }
+
+        $paniersNonValides = array_filter($paniers->toArray(), function($panier) {
+            return !$panier->getEtat();
+        });
+
+        $contenuPanier = new ContenuPanier();
+        $contenuPanier->addProduit($produit);
+        $paniersNonValides[0]->addContenuPanier($contenuPanier);
+
+
+        if($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
             return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
@@ -96,7 +115,7 @@ class ProduitController extends AbstractController
     #[Route('/{id}', name: 'app_produit_delete', methods: ['POST'])]
     public function delete(Request $request, Produit $produit, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$produit->getId(), $request->getPayload()->get('_token'))) {
+        if($this->isCsrfTokenValid('delete' . $produit->getId(), $request->getPayload()->get('_token'))) {
             $entityManager->remove($produit);
             $entityManager->flush();
         }

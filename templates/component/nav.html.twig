@@ -1,0 +1,18 @@
+<nav>
+    <ul style="display: flex; list-style: none; gap: 20px">
+        <li><a href="/">Accueil</a></li>
+        <li><a href="{{ path('app_produit_index') }}">Produits</a></li>
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
+            <li><a href="{{ path('app_user_index') }}">Utilisateurs</a></li>
+            <li><a href="{{ path('app_user_index') }}">Paniers non achetés</a></li>
+        {% endif %}
+        <li style="margin-left: auto">
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <a href="{{ path('app_logout') }}">Se déconnecter</a>
+        {% else %}
+            <a href="{{ path('app_login') }}">Se connecter</a>
+            <a href="{{ path('app_register') }}">S'inscrire</a>
+        {% endif %}
+        </li>
+    </ul>
+</nav>
