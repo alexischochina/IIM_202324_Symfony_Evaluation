@@ -2,10 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\ContenuPanier;
+use App\Entity\Panier;
 use App\Entity\Produit;
+use App\Entity\User;
 use App\Form\ProduitType;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
@@ -73,6 +77,34 @@ class ProduitController extends AbstractController
         return $this->render('produit/show.html.twig', [
             'produit' => $produit,
         ]);
+    }
+    #[Route('/add/{id}', name: 'app_produit_add', methods: ['GET'])]
+    public function add(Produit $produit, EntityManagerInterface $entityManager): Response
+    {
+        $contenuPanier = new ContenuPanier();
+
+        $contenuPanier->addProduit($produit);
+        $contenuPanier->setQquantite(1);
+        $contenuPanier->setDate(new \DateTime());
+        //$contenuPanier->setPanier($this->getUser()->getUserPanier());
+        
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+       
+        $panierValide = $entityManager->getRepository(Panier::class)->findPanierActif($user);
+
+        if($panierValide == null){
+            $panierValide = new Panier();
+            $panierValide->setUserPanier($user);
+            $panierValide->setEtat(false);
+            $entityManager->persist($panierValide);
+        }
+
+        $panierValide->addContenuPanier($contenuPanier);
+        $entityManager->persist($contenuPanier);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_contenu_panier_index');
     }
 
     #[Route('/{id}/edit', name: 'app_produit_edit', methods: ['GET', 'POST'])]

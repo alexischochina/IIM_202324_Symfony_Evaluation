@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PanierRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -20,12 +22,17 @@ class Panier
     #[ORM\Column]
     private ?bool $etat = null;
 
-    #[ORM\OneToOne(mappedBy: 'panier', cascade: ['persist', 'remove'])]
-    private ?ContenuPanier $contenuPanier = null;
-
     #[ORM\ManyToOne(inversedBy: 'paniers')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $userPanier = null;
+
+    #[ORM\OneToMany(targetEntity: ContenuPanier::class, mappedBy: 'panier', orphanRemoval: true)]
+    private Collection $contenuPanier;
+
+    public function __construct()
+    {
+        $this->contenuPanier = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -56,28 +63,6 @@ class Panier
         return $this;
     }
 
-    public function getContenuPanier(): ?ContenuPanier
-    {
-        return $this->contenuPanier;
-    }
-
-    public function setContenuPanier(?ContenuPanier $contenuPanier): static
-    {
-        // unset the owning side of the relation if necessary
-        if ($contenuPanier === null && $this->contenuPanier !== null) {
-            $this->contenuPanier->setPanier(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($contenuPanier !== null && $contenuPanier->getPanier() !== $this) {
-            $contenuPanier->setPanier($this);
-        }
-
-        $this->contenuPanier = $contenuPanier;
-
-        return $this;
-    }
-
     public function getUserPanier(): ?User
     {
         return $this->userPanier;
@@ -86,6 +71,36 @@ class Panier
     public function setUserPanier(?User $userPanier): static
     {
         $this->userPanier = $userPanier;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ContenuPanier>
+     */
+    public function getContenuPanier(): Collection
+    {
+        return $this->contenuPanier;
+    }
+
+    public function addContenuPanier(ContenuPanier $contenuPanier): static
+    {
+        if (!$this->contenuPanier->contains($contenuPanier)) {
+            $this->contenuPanier->add($contenuPanier);
+            $contenuPanier->setPanier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContenuPanier(ContenuPanier $contenuPanier): static
+    {
+        if ($this->contenuPanier->removeElement($contenuPanier)) {
+            // set the owning side to null (unless already changed)
+            if ($contenuPanier->getPanier() === $this) {
+                $contenuPanier->setPanier(null);
+            }
+        }
 
         return $this;
     }

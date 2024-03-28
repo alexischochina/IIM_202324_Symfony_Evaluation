@@ -10,6 +10,7 @@
             <tr>
                 <th>Id</th>
                 <th>Qquantite</th>
+                <th>Photo</th>
                 <th>Date</th>
                 <th>actions</th>
             </tr>
@@ -19,6 +20,9 @@
             <tr>
                 <td>{{ contenu_panier.id }}</td>
                 <td>{{ contenu_panier.Qquantite }}</td>
+                {% for p in contenu_panier.produit %}
+                <td><img src="{{asset('uploads/' ~ p.Photo)}}" alt="logo du produit" width="100px" height="100px">
+                {% endfor %}
                 <td>{{ contenu_panier.date ? contenu_panier.date|date('Y-m-d') : '' }}</td>
                 <td>
                     <a href="{{ path('app_contenu_panier_show', {'id': contenu_panier.id}) }}">show</a>
