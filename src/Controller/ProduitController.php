@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\ContenuPanier;
-use App\Entity\ContenuPanier;
 use App\Entity\Panier;
 use App\Entity\Produit;
 use App\Entity\User;
