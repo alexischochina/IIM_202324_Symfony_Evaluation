@@ -26,12 +26,12 @@
                 <td>{{ produit.stock }}</td>
                 <td><img src="{{ asset('uploads/' ~ produit.Photo) }}" alt="logo du produit" width="100px"
                          height="100px"></td>
-                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %}
-                    <td>
-                        <a href="{{ path('app_produit_show', {'id': produit.id}) }}">show</a>
+                <td>
+                    <a href="{{ path('app_produit_show', {'id': produit.id}) }}">show</a>
+                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %}
                         <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>
-                    </td>
-                {% endif %}
+                    {% endif %}
+                </td>
             </tr>
         {% else %}
             <tr>

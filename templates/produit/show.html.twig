@@ -38,7 +38,8 @@
     <a href="{{ path('app_produit_index') }}">back to list</a>
     <a href="{{ path('app_produit_add', {'id': produit.id}) }}">add panier</a>
 
-    <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>
-
-    {{ include('produit/_delete_form.html.twig') }}
+    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %}
+        <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>
+        {{ include('produit/_delete_form.html.twig') }}
+    {% endif %}
 {% endblock %}

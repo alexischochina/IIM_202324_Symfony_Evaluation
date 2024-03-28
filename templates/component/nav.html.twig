@@ -2,6 +2,7 @@
     <ul style="display: flex; list-style: none; gap: 20px">
         <li><a href="/">Accueil</a></li>
         <li><a href="{{ path('app_produit_index') }}">Produits</a></li>
+        <li><a href="{{ path('app_contenu_panier_index') }}">Panier</a></li>
         {% if is_granted('ROLE_SUPER_ADMIN') %}
             <li><a href="{{ path('app_user_index') }}">Utilisateurs</a></li>
             <li><a href="{{ path('app_user_index') }}">Paniers non achetés</a></li>

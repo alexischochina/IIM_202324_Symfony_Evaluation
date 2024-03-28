@@ -7,13 +7,13 @@
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Qquantite</th>
-                <th>Photo</th>
-                <th>Date</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Qquantite</th>
+            <th>Photo</th>
+            <th>Date</th>
+            <th>actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for contenu_panier in contenu_paniers %}
@@ -21,12 +21,14 @@
                 <td>{{ contenu_panier.id }}</td>
                 <td>{{ contenu_panier.Qquantite }}</td>
                 {% for p in contenu_panier.produit %}
-                <td><img src="{{asset('uploads/' ~ p.Photo)}}" alt="logo du produit" width="100px" height="100px">
-                {% endfor %}
+                <td><img src="{{ asset('uploads/' ~ p.Photo) }}" alt="logo du produit" width="100px" height="100px">
+                    {% endfor %}
                 <td>{{ contenu_panier.date ? contenu_panier.date|date('Y-m-d') : '' }}</td>
                 <td>
                     <a href="{{ path('app_contenu_panier_show', {'id': contenu_panier.id}) }}">show</a>
-                    <a href="{{ path('app_contenu_panier_edit', {'id': contenu_panier.id}) }}">edit</a>
+                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %}
+                        <a href="{{ path('app_contenu_panier_edit', {'id': contenu_panier.id}) }}">edit</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -36,6 +38,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_contenu_panier_new') }}">Create new</a>
 {% endblock %}
