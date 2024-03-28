@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CompteController!{% endblock %}
+
+{% block body %}
+ 
+{% for p in panier %}
+{% if p.etat == 1 %}
+<p>{{p.userPanier.nom}}</p>
+<p>{{p.dateAchat|date('d/m/Y H:i:s')}}</p>
+<p>{{p.etat}}</p>
+
+<a href="{{ path('app_panier_show', {'id': p.id} )}}">show</a>
+{% endif %}
+{% endfor %}
+
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CompteController!{% endblock %}
+
+{% block body %}
+{% for p in panier.contenuPanier %}
+{% for q in p.produit %}
+<p>{{q.nom}}</p>
+<img src="{{ asset('uploads/'~ q.photo)}}" style= "max-width: 100px;">
+
+{% endfor %}
+{% endfor %}
+<a href="{{ path('app_panier')}}">back</a>
+
+{% endblock %}
