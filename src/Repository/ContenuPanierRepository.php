@@ -21,7 +21,6 @@ class ContenuPanierRepository extends ServiceEntityRepository
         parent::__construct($registry, ContenuPanier::class);
     }
 
-    // get contenuPanier by panier id
     public function findContenuPanierByPanierId($id)
     {
         return $this->createQueryBuilder('c')

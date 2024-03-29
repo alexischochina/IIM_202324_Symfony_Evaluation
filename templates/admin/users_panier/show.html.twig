@@ -3,10 +3,8 @@
 {% block title %}ContenuPanier index{% endblock %}
 
 {% block body %}
-    <h1>Paniers de Machin</h1>
+    <h1>Paniers de {{ user.prenom }} {{ user.nom }}</h1>
     {% if contenu %}
-        {{ dump(contenu) }}
-        {{ dump(contenu_panier) }}
         <table>
             <thead>
             <tr>
@@ -18,13 +16,12 @@
             </thead>
             <tbody>
             {% for produit in contenu %}
-                {{ dump(produit) }}
                 <tr>
-                    {#<td><img src="{{ asset('uploads/' ~ produit.Photo) }}" alt="logo du produit" width="100px"
+                    <td><img src="{{ asset('uploads/' ~ produit.produit.Photo) }}" alt="logo du produit" width="100px"
                              height="100px"></td>
-                    <td>{{ produit.nom }}</td>
-                    <td>{{ produit.prix }}€</td>
-                    <td>{{ produit.stock }}</td>#}
+                    <td>{{ produit.produit.nom }}</td>
+                    <td>{{ produit.produit.prix }}€</td>
+                    <td>{{ produit.quantite }}</td>
                 </tr>
             {% endfor %}
             </tbody>

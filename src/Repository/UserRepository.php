@@ -38,6 +38,31 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->getEntityManager()->flush();
     }
 
+    public function findUserByPanierId($id)
+    {
+        return $this->createQueryBuilder('u')
+            ->join('u.paniers', 'p')
+            ->andWhere('p.id = :val')
+            ->setParameter('val', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    // get users who have created their account today, and return them in descending order
+    public function findRecentUsers()
+    {
+        $today = (new \DateTime())->setTime(0, 0);
+
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.creation_date >= :val')
+            ->setParameter('val', $today)
+            ->orderBy('u.id', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     //    /**
     //     * @return User[] Returns an array of User objects
     //     */

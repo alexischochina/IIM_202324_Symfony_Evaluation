@@ -42,11 +42,11 @@ security:
         - { path: ^/produit/new, roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN] }
         - { path: ^/produit/edit, roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN] }
         - { path: ^/produit/delete, roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN] }
-        - { path: ^/user/edit, roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN] }
-        - { path: ^/user/new, roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN] }
-        - { path: ^/user/delete, roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN] }
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/user, roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN] }
+        - { path: ^/user/super-admin, roles: [ROLE_SUPER_ADMIN] }
+        - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/panier, roles: ROLE_USER }
+        - { path: ^/contenu/panier/, roles: ROLE_USER }
 
 when@test:
     security:
