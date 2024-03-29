@@ -21,6 +21,17 @@ class ProduitRepository extends ServiceEntityRepository
         parent::__construct($registry, Produit::class);
     }
 
+    // get all product from contenu_panier where panier id = $id
+    public function findProduitByPanierId($id)
+    {
+        return $this->createQueryBuilder('p')
+            ->join('p.contenuPaniers', 'c')
+            ->where('c.panier = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return Produit[] Returns an array of Produit objects
     //     */

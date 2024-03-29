@@ -3,14 +3,33 @@
 {% block title %}ContenuPanier index{% endblock %}
 
 {% block body %}
-    <h1>Paniers actif</h1>
-    {{ test }}
-
-    {% if contenu_panier %}
+    <h1>Paniers de Machin</h1>
+    {% if contenu %}
+        {{ dump(contenu) }}
         {{ dump(contenu_panier) }}
-        {% for contenu in contenu_panier %}
-            {{ contenu.id }}
-        {% endfor %}
+        <table>
+            <thead>
+            <tr>
+                <th>Photo</th>
+                <th>Nom</th>
+                <th>Prix</th>
+                <th>Quantité</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for produit in contenu %}
+                {{ dump(produit) }}
+                <tr>
+                    {#<td><img src="{{ asset('uploads/' ~ produit.Photo) }}" alt="logo du produit" width="100px"
+                             height="100px"></td>
+                    <td>{{ produit.nom }}</td>
+                    <td>{{ produit.prix }}€</td>
+                    <td>{{ produit.stock }}</td>#}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
     {% else %}
         <p>Le panier est vide.</p>
     {% endif %}
