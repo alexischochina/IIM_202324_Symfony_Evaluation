@@ -1,45 +1,121 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}ContenuPanier index{% endblock %}
+{% block title %}ContenuPanier{% endblock %}
 
 {% block body %}
-    <h1>ContenuPanier index</h1>
+<style>
+ .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Qquantite</th>
-            <th>Photo</th>
-            <th>Date</th>
-            <th>actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for contenu_panier in contenu_paniers %}
-            <tr>
-                <td>{{ contenu_panier.id }}</td>
-                <td>{{ contenu_panier.Qquantite }}</td>
-                {% for p in contenu_panier.produit %}
-                <td><img src="{{ asset('uploads/' ~ p.Photo) }}" alt="logo du produit" width="100px" height="100px">
-                    {% endfor %}
-                <td>{{ contenu_panier.date ? contenu_panier.date|date('Y-m-d') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_contenu_panier_show', {'id': contenu_panier.id}) }}">show</a>
-                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %}
-                        <a href="{{ path('app_contenu_panier_edit', {'id': contenu_panier.id}) }}">edit</a>
-                    {% endif %}
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    {% for contenu_panier in contenu_paniers %}
+        .card {
+            width: 200px;
+            height: 300px;
+            margin: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            border-radius: 10px;
+            display: inline-block;
+        }
 
-            <a href="{{ path('app_contenu_panier_add', {'id': contenu_panier.id}) }}">confirmer</a>
-    {% endfor %}
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+
+        .card img {
+            border-radius: 10px 10px 0 0;
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 10px;
+        }
+
+        .card-title {
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .card-text {
+            font-size: 0.8rem;
+            margin-bottom: 5px;
+        }
+
+       .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            font-size: 14px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        .no-product {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Style du bouton confirmer */
+      .confirm-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+
+        .confirm-btn:hover {
+            background-color: #0056b3; /* Bleu foncé au survol */
+        }
+    </style>
+    <div class="container">
+        <h1 class="text-center">Panier</h1>
+
+        <div class="card-container">
+            {% for contenu_panier in contenu_paniers %}
+                <div class="card">
+                    <div class="card-img">
+                        {% for p in contenu_panier.produit %}
+                            <img src="{{ asset('uploads/' ~ p.Photo) }}" alt="logo du produit">
+                        {% endfor %}
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">{{ contenu_panier.id }}</h2>
+                        <p class="card-text">Quantite: {{ contenu_panier.Qquantite }}</p>
+                        <p class="card-text">Date: {{ contenu_panier.date ? contenu_panier.date|date('Y-m-d') : '' }}</p>
+                        <div class="card-actions">
+                            <a href="{{ path('app_contenu_panier_show', {'id': contenu_panier.id}) }}" class="btn">Show</a>
+                            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %}
+                                <a href="{{ path('app_contenu_panier_edit', {'id': contenu_panier.id}) }}" class="btn">Edit</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <p class="no-product">No records found</p>
+            {% endfor %}
+        </div>
+    </div>
+    {% if contenu_paniers is not empty %}
+        <a href="{{ path('app_contenu_panier_add', {'id': contenu_paniers[0].id}) }}" class="confirm-btn">Confirmer</a>
+    {% endif %}
 {% endblock %}

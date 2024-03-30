@@ -1,20 +1,80 @@
-<nav>
-    <ul style="display: flex; list-style: none; gap: 20px">
-        <li><a href="/">Accueil</a></li>
-        <li><a href="{{ path('app_produit_index') }}">Produits</a></li>
-        <li><a href="{{ path('app_contenu_panier_index') }}">Panier</a></li>
-        {% if is_granted('IS_AUTHENTICATED_FULLY') and is_granted('ROLE_SUPER_ADMIN') %}
-            <li><a href="{{ path('app_admin_recent_users') }}">Utilisateurs récents</a></li>
-            <li><a href="{{ path('app_admin_users_panier') }}">Paniers actifs</a></li>
-        {% endif %}
-        <li style="margin-left: auto; display: flex; gap: 20px">
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <a href="{{ path('app_profile') }}">Mon profil</a>
-            <a href="{{ path('app_logout') }}">Se déconnecter</a>
-        {% else %}
-            <a href="{{ path('app_login') }}">Se connecter</a>
-            <a href="{{ path('app_register') }}">S'inscrire</a>
-        {% endif %}
-        </li>
-    </ul>
-</nav>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #f4f4f4;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            position: relative;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        nav ul li:nth-last-child(3)::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 1px;
+            height: 50%;
+            background-color: #ccc;
+            transform: translateY(-50%);
+        }
+
+        /* Aligner les liens à droite */
+        nav ul li:last-child {
+            margin-left: auto;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/">Accueil</a></li>
+            <li><a href="{{ path('app_produit_index') }}">Produits</a></li>
+            <li><a href="{{ path('app_contenu_panier_index') }}">Panier</a></li>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') and is_granted('ROLE_SUPER_ADMIN') %}
+                <li><a href="{{ path('app_admin_recent_users') }}">Utilisateurs récents</a></li>
+                <li><a href="{{ path('app_admin_users_panier') }}">Paniers actifs</a></li>
+            {% endif %}
+            <li>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a href="{{ path('app_profile') }}">Mon profil</a>
+            {% else %}
+                <a href="{{ path('app_login') }}">Se connecter</a>
+            {% endif %}
+            </li>
+            <li>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a href="{{ path('app_logout') }}">Se déconnecter</a>
+            {% else %}
+                <a href="{{ path('app_register') }}">S'inscrire</a>
+            {% endif %}
+            </li>
+        </ul>
+    </nav>
+</body>
+</html>
