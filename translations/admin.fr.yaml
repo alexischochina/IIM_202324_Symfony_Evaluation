@@ -1,0 +1,7 @@
+recent_users:
+  title: "Utilisateurs récents inscrits aujourd'hui"
+  empty: "Aucun utilisateur récent"
+
+active_carts:
+    title: "Paniers actifs"
+    empty: "Aucun panier actif"

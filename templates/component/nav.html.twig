@@ -1,19 +1,20 @@
+{% trans_default_domain 'commons' %}
 <nav>
     <ul style="display: flex; list-style: none; gap: 20px">
-        <li><a href="/">Accueil</a></li>
-        <li><a href="{{ path('app_produit_index') }}">Produits</a></li>
-        <li><a href="{{ path('app_contenu_panier_index') }}">Panier</a></li>
+        <li><a href="/">{{ 'nav.home'|trans }}</a></li>
+        <li><a href="{{ path('app_produit_index') }}">{{ 'nav.products'|trans }}</a></li>
+        <li><a href="{{ path('app_contenu_panier_index') }}">{{ 'nav.cart'|trans }}</a></li>
         {% if is_granted('IS_AUTHENTICATED_FULLY') and is_granted('ROLE_SUPER_ADMIN') %}
-            <li><a href="{{ path('app_admin_recent_users') }}">Utilisateurs récents</a></li>
-            <li><a href="{{ path('app_admin_users_panier') }}">Paniers actifs</a></li>
+            <li><a href="{{ path('app_admin_recent_users') }}">{{ 'nav.recent_users'|trans }}</a></li>
+            <li><a href="{{ path('app_admin_users_panier') }}">{{ 'nav.active_carts'|trans }}</a></li>
         {% endif %}
         <li style="margin-left: auto; display: flex; gap: 20px">
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <a href="{{ path('app_profile') }}">Mon profil</a>
-            <a href="{{ path('app_logout') }}">Se déconnecter</a>
+            <a href="{{ path('app_profile') }}">{{ 'nav.profile'|trans }}</a>
+            <a href="{{ path('app_logout') }}">{{ 'nav.logout'|trans }}</a>
         {% else %}
-            <a href="{{ path('app_login') }}">Se connecter</a>
-            <a href="{{ path('app_register') }}">S'inscrire</a>
+            <a href="{{ path('app_login') }}">{{ 'nav.login'|trans }}</a>
+            <a href="{{ path('app_register') }}">{{ 'nav.register'|trans }}</a>
         {% endif %}
         </li>
     </ul>

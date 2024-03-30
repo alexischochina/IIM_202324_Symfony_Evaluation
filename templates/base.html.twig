@@ -12,6 +12,13 @@
         {% endblock %}
     </head>
     {{ include('component/nav.html.twig') }}
+
+    {% for type, message in app.flashes %}
+        {% for m in message %}
+            <p class="alert alert-{{ type }}">{{ m }}</p>
+        {% endfor %}
+    {% endfor %}
+
     <body>
         {% block body %}{% endblock %}
     </body>

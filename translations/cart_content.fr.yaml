@@ -1,0 +1,16 @@
+message:
+  delete: 'Êtes-vous sûr de vouloir supprimer ce produit ?'
+
+edit:
+  title: 'Modifier le panier'
+  success: 'Produit modifié avec succès'
+
+index:
+  title: 'Mon panier'
+  empty: 'Votre panier est vide'
+
+new:
+  title: 'Ajouter un produit'
+
+show:
+  title: "Détails du produit"

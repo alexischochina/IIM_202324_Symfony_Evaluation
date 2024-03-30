@@ -1,0 +1,38 @@
+nav:
+  home: 'Accueil'
+  products: 'Produits'
+  cart: 'Panier'
+  recent_users: 'Utilisateurs récents'
+  active_carts: 'Paniers actifs'
+  profile: 'Mon compte'
+  logout: 'Se déconnecter'
+  login: 'Se connecter'
+  register: "S'inscrire"
+title: 'Accueil'
+tab_title: 'Application ecommerce'
+
+btn:
+  show: 'Afficher'
+  add: 'Ajouter'
+  edit: 'Modifier'
+  delete: 'Supprimer'
+  save: 'Enregistrer'
+  cancel: 'Annuler'
+  back: 'Retour'
+  confirmed: 'Confirmé'
+
+tab:
+  name: 'Nom'
+  forname: 'Prénom'
+  user: 'Utilisateur'
+  email: 'Email'
+  description: 'Description'
+  price: 'Prix'
+  stock: 'Stock'
+  quantity: 'Quantité'
+  photo: 'Photo'
+  actions: 'Actions'
+  cart_num: 'Numéro du panier'
+  delete: 'Supprimer'
+  save: 'Enregistrer'
+  date: 'Date'

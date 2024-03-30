@@ -1,0 +1,17 @@
+cart_content:
+    new: 'New cart created'
+    edit: 'Your cart has been updated'
+    add: 'Your cart has been ordered'
+    delete: 'Cart deleted'
+product:
+    file: "unable to upload the file"
+    new: 'New product added'
+    add: 'Product  added to your cart'
+    edit: 'Product updated'
+    delete: 'Product updated'
+profile:
+    edit: 'Your account has been updated'
+register: 'Your account has been created'
+user:
+    edit: "User info updated"
+    delete: "User deleted"

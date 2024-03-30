@@ -1,45 +1,43 @@
 {% extends 'base.html.twig' %}
+{% trans_default_domain 'cart_content' %}
 
-{% block title %}ContenuPanier index{% endblock %}
+{% block title %}{{ 'index.title'|trans }}{% endblock %}
 
 {% block body %}
-    <h1>ContenuPanier index</h1>
+    <h1>{{ 'index.title'|trans }}</h1>
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Qquantite</th>
-            <th>Photo</th>
-            <th>Date</th>
-            <th>actions</th>
-        </tr>
-        </thead>
-        <tbody>
+    {% if contenu_paniers %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>{{ 'tab.quantity'|trans({}, 'commons') }}</th>
+                <th>{{ 'tab.photo'|trans({}, 'commons') }}</th>
+                <th>{{ 'tab.date'|trans({}, 'commons') }}</th>
+                <th>{{ 'tab.actions'|trans({}, 'commons') }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for contenu_panier in contenu_paniers %}
+                <tr>
+                    <td>{{ contenu_panier.Qquantite }}</td>
+                    {% for p in contenu_panier.produit %}
+                    <td><img src="{{ asset('uploads/' ~ p.Photo) }}" alt="logo du produit" width="100px" height="100px">
+                        {% endfor %}
+                    <td>{{ contenu_panier.date ? contenu_panier.date|date('Y-m-d') : '' }}</td>
+                    <td>
+                        <a href="{{ path('app_contenu_panier_show', {'id': contenu_panier.id}) }}">{{ 'btn.show'|trans({}, 'commons') }}</a>
+                        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %}
+                            <a href="{{ path('app_contenu_panier_edit', {'id': contenu_panier.id}) }}">{{ 'btn.edit'|trans({}, 'commons') }}</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
         {% for contenu_panier in contenu_paniers %}
-            <tr>
-                <td>{{ contenu_panier.id }}</td>
-                <td>{{ contenu_panier.Qquantite }}</td>
-                {% for p in contenu_panier.produit %}
-                <td><img src="{{ asset('uploads/' ~ p.Photo) }}" alt="logo du produit" width="100px" height="100px">
-                    {% endfor %}
-                <td>{{ contenu_panier.date ? contenu_panier.date|date('Y-m-d') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_contenu_panier_show', {'id': contenu_panier.id}) }}">show</a>
-                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %}
-                        <a href="{{ path('app_contenu_panier_edit', {'id': contenu_panier.id}) }}">edit</a>
-                    {% endif %}
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
+            <a href="{{ path('app_contenu_panier_add', {'id': contenu_panier.id}) }}">{{ 'btn.confirmed'|trans({}, 'commons') }}</a>
         {% endfor %}
-        </tbody>
-    </table>
-    {% for contenu_panier in contenu_paniers %}
-
-            <a href="{{ path('app_contenu_panier_add', {'id': contenu_panier.id}) }}">confirmer</a>
-    {% endfor %}
+    {% else %}
+        <p>{{ 'index.empty'|trans }}</p>
+    {% endif %}
 {% endblock %}

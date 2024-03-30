@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
+{% trans_default_domain 'cart_content' %}
 
-{% block title %}New ContenuPanier{% endblock %}
+{% block title %}{{ 'new.title'|trans }}{% endblock %}
 
 {% block body %}
-    <h1>Create new ContenuPanier</h1>
+    <h1>{{ 'new.title'|trans }}</h1>
 
     {{ include('contenu_panier/_form.html.twig') }}
 
-    <a href="{{ path('app_contenu_panier_index') }}">back to list</a>
+    <a href="{{ path('app_contenu_panier_index') }}">{{ 'btn.back'|trans({}, 'commons') }}</a>
 {% endblock %}

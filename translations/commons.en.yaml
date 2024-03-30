@@ -1,0 +1,12 @@
+nav:
+  home: 'Home'
+  products: 'Products'
+  cart: 'Shopping cart'
+  recent_users: 'Recent users'
+  active_carts: 'Active carts'
+  profile: 'My account'
+  logout: 'Logout'
+  login: 'Login'
+  register: "Register"
+title: 'Home'
+tab_title: 'Ecommerce app'

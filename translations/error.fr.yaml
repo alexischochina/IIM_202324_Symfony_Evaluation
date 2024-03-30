@@ -1,0 +1,9 @@
+btn: "Retour à l'accueil"
+
+404:
+  title: 'Erreur 404'
+  text: 'La page que vous cherchez semble introuvable.'
+
+500:
+    title: 'Erreur 500'
+    text: "Il semble qu'un dysfonctionnement ce soit produit."

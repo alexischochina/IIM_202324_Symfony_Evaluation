@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'error' %}
+
+{% block title %}{{ '404.title'|trans }}{% endblock %}
+
+{% block body %}
+    <h1>{{ '404.title'|trans }}</h1>
+    <p>{{ '404.text'|trans }}</p>
+    <a href="{{ path('app_home') }}">{{ 'btn'|trans }}</a>
+{% endblock %}

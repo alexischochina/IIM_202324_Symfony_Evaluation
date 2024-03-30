@@ -1,0 +1,16 @@
+cart_content:
+    new: 'Nouveau panier créé'
+    edit: 'Votre panier a été mis à jour'
+    add: 'Votre panier a été commandé'
+    delete: 'Le panier a été supprimé'
+product:
+    file: "Impossible d'uploader le fichier"
+    new: 'Le produit a été ajouté'
+    add: 'Le produit a été ajouté dans votre panier'
+    edit: 'Le produit a été mis à jour'
+    delete: 'Le produit a été supprimé'
+profile: 'Votre profil a été mis à jour'
+register: 'Votre compte a été créé'
+user:
+    edit: "Les infos de l'utilisateur ont été mise à jour"
+    delete: "L'utilisateur a été supprimé"

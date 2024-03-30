@@ -1,16 +1,18 @@
+{% trans_default_domain 'admin' %}
 {% extends 'base.html.twig' %}
 
-{% block title %}ContenuPanier index{% endblock %}
+{% block title %}{{ 'active_carts.title'|trans }}{% endblock %}
 
 {% block body %}
-    <h1>Paniers actif</h1>
+    <h1>{{ 'active_carts.title'|trans }}</h1>
 
+    {% if paniers %}
     <table class="table">
         <thead>
         <tr>
-            <th>Utilisateur</th>
-            <th>Numéro du panier</th>
-            <th>Actions</th>
+            <th>{{ 'tab.user'|trans({}, 'commons') }}</th>
+            <th>{{ 'tab.cart_num'|trans({}, 'commons') }}</th>
+            <th>{{ 'tab.actions'|trans({}, 'commons') }}</th>
         </tr>
         </thead>
         <tbody>
@@ -19,14 +21,13 @@
                 <td>{{ panier.userPanier.nom }} {{ panier.userPanier.prenom }}</td>
                 <td>{{ panier.id }}</td>
                 <td>
-                    <a href="{{ path('app_admin_users_panier_show', {'id': panier.id}) }}">show</a>
+                    <a href="{{ path('app_admin_users_panier_show', {'id': panier.id}) }}">{{ 'btn.show'|trans({}, 'commons') }}</a>
                 </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+    {% else %}
+        <p>{{ 'active_carts.empty'|trans }}</p>
+    {% endif %}
 {% endblock %}
