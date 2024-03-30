@@ -1,4 +1,49 @@
 {% trans_default_domain 'commons' %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    nav {
+        background-color: #f4f4f4;
+    }
+
+    nav ul {
+        display: flex;
+        list-style: none;
+    }
+
+    nav ul li {
+        position: relative;
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: #333;
+        padding: 10px 20px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    nav ul li:nth-last-child(3)::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 0;
+        width: 1px;
+        height: 50%;
+        background-color: #ccc;
+        transform: translateY(-50%);
+    }
+
+    /* Aligner les liens à droite */
+    nav ul li:last-child {
+        margin-left: auto;
+    }
+</style>
 <nav>
     <ul style="display: flex; list-style: none; gap: 20px">
         <li><a href="/">{{ 'nav.home'|trans }}</a></li>
@@ -8,7 +53,7 @@
             <li><a href="{{ path('app_admin_recent_users') }}">{{ 'nav.recent_users'|trans }}</a></li>
             <li><a href="{{ path('app_admin_users_panier') }}">{{ 'nav.active_carts'|trans }}</a></li>
         {% endif %}
-        <li style="margin-left: auto; display: flex; gap: 20px">
+        <li>
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <a href="{{ path('app_profile') }}">{{ 'nav.profile'|trans }}</a>
             <a href="{{ path('app_logout') }}">{{ 'nav.logout'|trans }}</a>
