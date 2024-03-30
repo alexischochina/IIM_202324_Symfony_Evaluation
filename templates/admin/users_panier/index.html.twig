@@ -7,20 +7,19 @@
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Utilisateur</th>
-                <th>Numéro du panier</th>
-                <th>Actions</th>
-            </tr>
+        <tr>
+            <th>Utilisateur</th>
+            <th>Numéro du panier</th>
+            <th>Actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for panier in paniers %}
             <tr>
                 <td>{{ panier.userPanier.nom }} {{ panier.userPanier.prenom }}</td>
-                {{ panier.userPanier.id }} {{ panier.id }}<br />
                 <td>{{ panier.id }}</td>
                 <td>
-                    <a href="{{ path('app_admin_users_panier_show', {'id': panier.userPanier.id}) }}">show</a>
+                    <a href="{{ path('app_admin_users_panier_show', {'id': panier.id}) }}">show</a>
                 </td>
             </tr>
         {% else %}
@@ -29,4 +28,5 @@
             </tr>
         {% endfor %}
         </tbody>
+    </table>
 {% endblock %}

@@ -3,8 +3,8 @@
         <li><a href="/">Accueil</a></li>
         <li><a href="{{ path('app_produit_index') }}">Produits</a></li>
         <li><a href="{{ path('app_contenu_panier_index') }}">Panier</a></li>
-        {% if is_granted('ROLE_SUPER_ADMIN') %}
-            <li><a href="{{ path('app_user_index') }}">Utilisateurs</a></li>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') and is_granted('ROLE_SUPER_ADMIN') %}
+            <li><a href="{{ path('app_admin_recent_users') }}">Utilisateurs récents</a></li>
             <li><a href="{{ path('app_admin_users_panier') }}">Paniers actifs</a></li>
         {% endif %}
         <li style="margin-left: auto; display: flex; gap: 20px">
