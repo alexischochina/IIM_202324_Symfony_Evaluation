@@ -1,0 +1,5 @@
+title: "Register"
+btn: "Register"
+flash:
+  terms: "You must accept the terms"
+  pass: "Your password must contain at least 6 characters"

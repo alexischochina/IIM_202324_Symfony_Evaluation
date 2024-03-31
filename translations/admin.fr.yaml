@@ -3,5 +3,9 @@ recent_users:
   empty: "Aucun utilisateur récent"
 
 active_carts:
-    title: "Paniers actifs"
-    empty: "Aucun panier actif"
+  title: "Paniers actifs"
+  empty: "Aucun panier actif"
+
+cart_content:
+  title: 'Panier de'
+  empty: 'Le panier est vide'

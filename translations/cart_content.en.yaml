@@ -1,0 +1,16 @@
+message:
+  delete: 'Are you sure you want to remove this product?'
+
+edit:
+  title: 'Edit the cart'
+  success: 'Cart updated'
+
+index:
+  title: 'My cart'
+  empty: 'Your cart is empty'
+
+new:
+  title: 'Add a new product'
+
+show:
+  title: "Product details"

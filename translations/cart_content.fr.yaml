@@ -14,3 +14,7 @@ new:
 
 show:
   title: "Détails du produit"
+
+admin:
+  title: 'Contenu du panier'
+  empty: 'Le panier de est vide'

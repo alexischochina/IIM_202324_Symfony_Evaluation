@@ -1,0 +1,9 @@
+btn: "Back to the home page"
+
+404:
+  title: '404 Error'
+  text: "The page you're looking for can't be found."
+
+500:
+    title: '500 Error'
+    text: "A malfunction seems to have occurred."

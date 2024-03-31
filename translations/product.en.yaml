@@ -1,0 +1,16 @@
+delete:
+  title: 'Delete this product'
+
+edit:
+  title: 'Edit this product'
+
+index:
+  title: 'Our products'
+  empty: 'No product found'
+  new: 'Add a new product'
+
+new:
+  title: 'Add a new product'
+
+show:
+  add: 'Add to the cart'

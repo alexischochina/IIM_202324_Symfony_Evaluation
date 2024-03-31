@@ -19,12 +19,12 @@ btn:
   save: 'Enregistrer'
   cancel: 'Annuler'
   back: 'Retour'
-  confirmed: 'Confirmé'
+  confirmed: 'Confirmer'
   update: 'Mettre  à jour'
 
 tab:
   name: 'Nom'
-  forname: 'Prénom'
+  firstname: 'Prénom'
   user: 'Utilisateur'
   email: 'Email'
   description: 'Description'

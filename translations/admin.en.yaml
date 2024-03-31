@@ -1,0 +1,11 @@
+recent_users:
+  title: "Recent users registered today"
+  empty: "No user found"
+
+active_carts:
+  title: "Active carts"
+  empty: "no carts found"
+
+cart_content:
+  title: 'Cart from user'
+  empty: 'The cart is empty'

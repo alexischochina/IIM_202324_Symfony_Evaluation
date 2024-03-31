@@ -3,4 +3,4 @@ edit: "Modifier cet utilisateur"
 index:
   title: "Liste des utilisateurs"
   empty: "Aucun utilisateur n'a été trouvé"
-new: "Ajouter un nouvel utilisateurw"
+new: "Ajouter un nouvel utilisateur"

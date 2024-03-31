@@ -9,8 +9,7 @@ product:
     add: 'Product  added to your cart'
     edit: 'Product updated'
     delete: 'Product updated'
-profile:
-    edit: 'Your account has been updated'
+profile: 'Your account has been updated'
 register: 'Your account has been created'
 user:
     edit: "User info updated"

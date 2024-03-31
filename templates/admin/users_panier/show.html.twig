@@ -1,17 +1,18 @@
 {% extends 'base.html.twig' %}
+{% trans_default_domain 'admin' %}
 
-{% block title %}ContenuPanier index{% endblock %}
+{% block title %}{{ 'cart_content.title'|trans }} {{ user.prenom }} {{ user.nom }}{% endblock %}
 
 {% block body %}
-    <h1>Paniers de {{ user.prenom }} {{ user.nom }}</h1>
+    <h1>{{ 'cart_content.title'|trans }} {{ user.prenom }} {{ user.nom }}</h1>
     {% if contenu %}
         <table>
             <thead>
             <tr>
-                <th>Photo</th>
-                <th>Nom</th>
-                <th>Prix</th>
-                <th>Quantité</th>
+                <th>{{ 'tab.photo'|trans({}, 'commons') }}</th>
+                <th>{{ 'tab.name'|trans({}, 'commons') }}</th>
+                <th>{{ 'tab.price'|trans({}, 'commons') }}</th>
+                <th>{{ 'tab.quantity'|trans({}, 'commons') }}</th>
             </tr>
             </thead>
             <tbody>
@@ -28,6 +29,6 @@
         </table>
 
     {% else %}
-        <p>Le panier est vide.</p>
+        <p>{{ 'cart_content.empty'|trans }}</p>
     {% endif %}
 {% endblock %}

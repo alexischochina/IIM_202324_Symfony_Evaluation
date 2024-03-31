@@ -1,5 +1,5 @@
 {% trans_default_domain 'cart_content' %}
 <form method="post" action="{{ path('app_contenu_panier_delete', {'id': contenu_panier.id}) }}" onsubmit="return confirm({{ 'message.delete'|trans }});">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ contenu_panier.id) }}">
-    <button class="btn">{{ 'tab.delete'|trans({}, 'commons') }}</button>
+    <button class="btn">{{ 'btn.delete'|trans({}, 'commons') }}</button>
 </form>

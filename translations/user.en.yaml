@@ -1,0 +1,6 @@
+delete: "Are you sure you want to delete this user?"
+edit: "Edit this user"
+index:
+  title: "Users list"
+  empty: "No user found"
+new: "Add a new user"

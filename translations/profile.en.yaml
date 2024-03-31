@@ -1,0 +1,7 @@
+edit:
+  title: 'Edit my profile'
+
+index:
+  title: 'My profile'
+  edit: 'Edit my profile'
+  history: "Purchase history"

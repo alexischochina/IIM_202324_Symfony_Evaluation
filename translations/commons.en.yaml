@@ -10,3 +10,32 @@ nav:
   register: "Register"
 title: 'Home'
 tab_title: 'Ecommerce app'
+
+btn:
+  show: 'Show'
+  add: 'Add'
+  edit: 'Edit'
+  delete: 'Delete'
+  save: 'Save'
+  cancel: 'Cancel'
+  back: 'Back'
+  confirmed: 'Confirm'
+  update: 'Update'
+
+tab:
+  name: 'Name'
+  firstname: 'First name'
+  user: 'User'
+  email: 'Email'
+  description: 'Description'
+  price: 'Price'
+  stock: 'Stock'
+  quantity: 'Quantity'
+  photo: 'Photo'
+  actions: 'Actions'
+  cart_num: 'Cart number'
+  date: 'Date'
+  role: 'Role'
+
+form:
+  password: 'Password'
