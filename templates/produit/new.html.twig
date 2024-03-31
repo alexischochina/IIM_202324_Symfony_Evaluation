@@ -5,8 +5,8 @@
 
 {% block body %}
     <h1>{{ 'new.title'|trans }}</h1>
-
-    {{ include('produit/_form.html.twig') }}
-
-    <a href="{{ path('app_produit_index') }}">{{ 'btn.back'|trans({}, 'commons') }}</a>
+    <div class="form">
+        {{ include('produit/_form.html.twig') }}
+        <a href="{{ path('app_produit_index') }}">{{ 'btn.back'|trans({}, 'commons') }}</a>
+    </div>
 {% endblock %}

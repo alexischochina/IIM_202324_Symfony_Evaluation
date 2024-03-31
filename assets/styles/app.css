@@ -1,3 +1,90 @@
 body {
     background-color: darkgray;
 }
+
+.form {
+    max-width: 500px;
+    margin-left: 20px;
+
+    input, button {
+        outline: none;
+    }
+
+    input:not(input[type="subpit"]), select {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    button, a {
+        margin-top: 20px;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+        text-decoration: none;
+        display: block;
+        width: fit-content;
+    }
+
+    > form {
+        > div {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            > div {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+        }
+
+        > button {
+            background: #28a745;
+        }
+
+        & + form > button {
+            background: #dc3545;
+        }
+    }
+
+    > a {
+        background: #007bff;
+    }
+
+    &.-row {
+        > form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            > div {
+                gap: 10px;
+                position: relative;
+
+                > label[for="registration_form_agreeTerms"] {
+                    margin-left: 30px;
+                }
+
+                > input[type="checkbox"] {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                }
+            }
+        }
+    }
+
+    &.-login {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        > button {
+            background: #28a745;
+        }
+    }
+}

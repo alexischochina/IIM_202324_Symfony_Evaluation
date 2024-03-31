@@ -6,8 +6,8 @@
 {% block body %}
     <h1>{{ 'title'|trans }}</h1>
 
-
-    {{ form_start(form) }}
+    <div class="form -row">
+        {{ form_start(form) }}
         {{ form_errors(form) }}
         {{ form_row(form.nom) }}
         {{ form_row(form.prenom) }}
@@ -18,5 +18,6 @@
         {{ form_row(form.agreeTerms) }}
 
         <button type="submit" class="btn">{{ 'btn'|trans }}</button>
-    {{ form_end(form) }}
+        {{ form_end(form) }}
+    </div>
 {% endblock %}

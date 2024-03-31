@@ -6,9 +6,9 @@
 {% block body %}
     <h1>{{ 'edit.title'|trans }}</h1>
 
-    {{ include('contenu_panier/_form.html.twig', {'button_label': 'btn.update'|trans({}, 'commons')}) }}
-
-    <a href="{{ path('app_contenu_panier_index') }}">{{ 'btn.back'|trans({}, 'commons') }}</a>
-
-    {{ include('contenu_panier/_delete_form.html.twig') }}
+    <div class="form">
+        {{ include('contenu_panier/_form.html.twig', {'button_label': 'btn.update'|trans({}, 'commons')}) }}
+        {{ include('contenu_panier/_delete_form.html.twig') }}
+        <a href="{{ path('app_contenu_panier_index') }}">{{ 'btn.back'|trans({}, 'commons') }}</a>
+    </div>
 {% endblock %}

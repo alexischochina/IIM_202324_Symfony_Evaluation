@@ -5,8 +5,8 @@
 
 {% block body %}
     <h1>{{ 'new.title'|trans }}</h1>
-
-    {{ include('contenu_panier/_form.html.twig') }}
-
-    <a href="{{ path('app_contenu_panier_index') }}">{{ 'btn.back'|trans({}, 'commons') }}</a>
+    <div class="form">
+        {{ include('contenu_panier/_form.html.twig') }}
+        <a href="{{ path('app_contenu_panier_index') }}">{{ 'btn.back'|trans({}, 'commons') }}</a>
+    </div>
 {% endblock %}
