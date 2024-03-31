@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
+{% trans_default_domain 'profile' %}
 
-{% block title %}Edit User{% endblock %}
+{% block title %}{{ 'edit.title'|trans }}{% endblock %}
 
 {% block body %}
-    <h1>Modifier mon profil</h1>
+    <h1>{{ 'edit.title'|trans }}</h1>
 
-    <a href="{{ path('app_user_index') }}">Retour</a>
+    <a href="{{ path('app_user_index') }}">{{ 'btn.back'|trans({}, 'commons') }}</a>
     {#{{ include('user/_form.html.twig', {'button_label': 'Update'}) }}#}
 
     {{ form_start(form) }}
@@ -14,7 +15,7 @@
     {{ form_row(form.prenom) }}
     {{ form_row(form.email) }}
 
-    <button class="btn">Mettre à jour</button>
+    <button class="btn">{{ 'btn.update'|trans({}, 'commons') }}</button>
     {{ form_end(form) }}
 
 {% endblock %}

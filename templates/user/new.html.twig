@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
+{% trans_default_domain 'user' %}
 
-{% block title %}New User{% endblock %}
+{% block title %}{{ 'new'|trans }}{% endblock %}
 
 {% block body %}
-    <h1>Create new User</h1>
+    <h1>{{ 'new'|trans }}</h1>
 
     {{ include('user/_form.html.twig') }}
 
-    <a href="{{ path('app_user_index') }}">back to list</a>
+    <a href="{{ path('app_user_index') }}">{{ 'btn.back'|trans({}, 'commons') }}</a>
 {% endblock %}

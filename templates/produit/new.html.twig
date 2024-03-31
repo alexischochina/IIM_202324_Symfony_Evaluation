@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
+{% trans_default_domain 'product' %}
 
-{% block title %}New Produit{% endblock %}
+{% block title %}{{ 'new.title'|trans }}{% endblock %}
 
 {% block body %}
-    <h1>Create new Produit</h1>
+    <h1>{{ 'new.title'|trans }}</h1>
 
     {{ include('produit/_form.html.twig') }}
 
-    <a href="{{ path('app_produit_index') }}">back to list</a>
+    <a href="{{ path('app_produit_index') }}">{{ 'btn.back'|trans({}, 'commons') }}</a>
 {% endblock %}

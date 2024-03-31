@@ -1,0 +1,7 @@
+edit:
+  title: 'Modifier mon profil'
+
+index:
+  title: 'Mon profil'
+  edit: 'Modifier mon profil'
+  history: "Historique d'achat"

@@ -1,0 +1,5 @@
+title: "S'inscrire"
+btn: "S'inscrire"
+flash:
+  terms: "Vous devez acceptez les conditions"
+  pass: "Votre mot de passe doit contenir au moins 6 caractères"

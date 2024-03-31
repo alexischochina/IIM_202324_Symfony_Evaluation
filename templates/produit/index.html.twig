@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
+{% trans_default_domain 'product' %}
 
+{% block title %}{{ 'index.title'|trans }}{% endblock %}
 
 {% block body %}
     <style>
@@ -97,7 +99,7 @@
         }
     </style>
 
-    <h1 class="text-center">Produit</h1>
+    <h1 class="text-center">{{ 'index.title'|trans }}</h1>
 
     {% if produits|length > 0 %}
         {% set featuredProduct = produits[0] %}
@@ -105,11 +107,11 @@
             <img src="{{ asset('uploads/' ~ featuredProduct.Photo) }}" alt="logo du produit">
             <div class="featured-product-title">{{ featuredProduct.nom }}</div>
             <div class="featured-product-price">{{ featuredProduct.prix }}€</div>
-             <a href="{{ path('app_produit_show', {'id': featuredProduct.id}) }}" class="btn">Voir</a>
+             <a href="{{ path('app_produit_show', {'id': featuredProduct.id}) }}" class="btn">{{ 'btn.show'|trans({}, 'commons') }}</a>
 
         </div>
     {% else %}
-        <p class="no-product">Aucun produit trouvé.</p>
+        <p class="no-product">{{ 'index.empty'|trans }}.</p>
     {% endif %}
 
     <div class="container">
@@ -122,9 +124,9 @@
                         <p>{{ produit.Description }}</p>
                         <p>{{ produit.prix }}€</p>
                         <p>Stock: {{ produit.stock }}</p>
-                        <a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="btn">Voir</a>
+                        <a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="btn">{{ 'btn.show'|trans({}, 'commons') }}</a>
                         {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %}
-                            <a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn">Modifier</a>
+                            <a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn">{{ 'btn.edit'|trans({}, 'commons') }}</a>
                         {% endif %}
                     </div>
                 </div>
@@ -134,7 +136,7 @@
 
     {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %}
         <div class="text-center mt-4">
-            <a href="{{ path('app_produit_new') }}" class="btn btn-success">Créer un nouveau produit</a>
+            <a href="{{ path('app_produit_new') }}" class="btn btn-success">{{ 'index.new'|trans }}</a>
         </div>
     {% endif %}
 {% endblock %}

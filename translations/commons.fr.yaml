@@ -12,7 +12,7 @@ title: 'Accueil'
 tab_title: 'Application ecommerce'
 
 btn:
-  show: 'Afficher'
+  show: 'Voir'
   add: 'Ajouter'
   edit: 'Modifier'
   delete: 'Supprimer'
@@ -20,6 +20,7 @@ btn:
   cancel: 'Annuler'
   back: 'Retour'
   confirmed: 'Confirmé'
+  update: 'Mettre  à jour'
 
 tab:
   name: 'Nom'
@@ -36,3 +37,7 @@ tab:
   delete: 'Supprimer'
   save: 'Enregistrer'
   date: 'Date'
+  role: 'Rôle'
+
+form:
+  password: 'Mot de passe'

@@ -1,0 +1,16 @@
+delete:
+  title: 'Supprimer ce produit'
+
+edit:
+  title: 'Modifier ce produit'
+
+index:
+  title: 'Nos produits'
+  empty: 'Aucun produit trouvé'
+  new: 'Ajouter un nouveau produit'
+
+new:
+  title: 'Ajouter un nouveau produit'
+
+show:
+  add: 'Ajouter au panier'

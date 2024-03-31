@@ -1,39 +1,38 @@
 {% extends 'base.html.twig' %}
+{% trans_default_domain 'user' %}
 
-{% block title %}User index{% endblock %}
+{% block title %}{{ 'index.title'|trans }}{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
+    <h1>{{ 'index.title'|trans }}</h1>
 
+    {% if users %}
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>actions</th>
+                <th>{{ 'tab.name'|trans({}, 'commons') }}</th>
+                <th>{{ 'tab.forname'|trans({}, 'commons') }}</th>
+                <th>{{ 'tab.email'|trans({}, 'commons') }}</th>
+                <th>{{ 'tab.role'|trans({}, 'commons') }}</th>
+                <th>{{ 'tab.actions'|trans({}, 'commons') }}</th>
             </tr>
         </thead>
         <tbody>
         {% for user in users %}
             <tr>
-                <td>{{ user.id }}</td>
                 <td>{{ user.nom }}</td>
                 <td>{{ user.prenom }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                 <td>
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+                    <a href="{{ path('app_user_show', {'id': user.id}) }}">{{ 'btn.show'|trans({}, 'commons') }}</a>
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">{{ 'btn.edit'|trans({}, 'commons') }}</a>
                 </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+        {% else %}
+        <p>{{ 'index.empty'|trans }}</p>
+    {% endif %}
 {% endblock %}
